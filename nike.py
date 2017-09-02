@@ -184,21 +184,20 @@ if __name__ == "__main__":
 
         settings = driver.find_element_by_link_text("Settings")
         settings.click()
-        time.sleep(8)
+        time.sleep(1)
         driver.save_screenshot("snapshots/settings_page.png")
 
 
-        element = driver.find_element_by_link_text("New Card")
-        # element = driver.find_element_by_xpath("js-creditcard ncss-btn border-medium-grey ncss-brand pr5-sm pl5-sm pt3-sm pb3-sm pt2-md pb2-md u-uppercase mb2-sm mb0-md u-sm-b u-md-ib")
-        hov = ActionChains(driver).move_to_element(element)
-        hov.perform()
-        time.sleep(2)        
-        driver.save_screenshot("snapshots/mouse_over.png");
-        new_card.click()
+#        driver.execute_script("")
 
 
+        element = driver.find_element_by_partial_link_text("NEW CARD")
+        element.click()
+        time.sleep(15)
+        driver.save_screenshot("snapshots/new_card.png");
+        
 
-        driver.save_screenshot("snapshots/cc_form.png");
+
 
 
         # Input ID
@@ -214,13 +213,26 @@ if __name__ == "__main__":
         zipcode=""
         no="123456"
 
-        ccInput = driver.find_element_by_id("creditCardNumber")
+        
+
+        iframe = driver.find_elements_by_tag_name('iframe')[0]
+#        driver.switch_to_default_content()
+        print(iframe)
+        driver.switch_to_frame(iframe)
+        driver.save_screenshot("snapshots/iframe.png");
+
+        ccInput = driver.find_element_by_xpath("//input[@id='creditCardNumber']")
         ccInput.clear()
         ccInput.send_keys(ccnumber)
+
 
         expirationInput = driver.find_element_by_id("expirationDate")
         expirationInput.clear()
         expirationInput.send_keys(expiration)
+
+
+        driver.switchTo().defaultContent();
+        driver.save_screenshot("snapshots/back-from-iframe.png");
 
 
         fnameInput = driver.find_element_by_id("first-name-shipping")
@@ -259,27 +271,19 @@ if __name__ == "__main__":
         mobInput.clear()
         mobInput.send_keys(no)
 
-
-
-
-
         driver.save_screenshot("snapshots/filled-credit-form.png")
         print('sleep after login')
-
         saveButton = driver.find_element_by_link_text("Save")
         saveButton.click()
         time.sleep(20)     
-
-
         driver.save_screenshot("snapshots/almost-done.png")
-
         menu=driver.find_element_by_xpath("//figcaption[@class='test-name small text-color-grey u-capitalize u-sm-ib u-va-m']")
         menu.click()
         logout = driver.find_element_by_link_text("Logout")
         logout.click()
-        driver.save_screenshot("snapshots/slogged_out_page.png")
-                
+        driver.save_screenshot("snapshots/slogged_out_page.png")                
         print("Logged out user now closing Phantomjs Driver")
+
     except TimeoutException as e:
         print("Got Exception | Logging out     :")
         print(e)
