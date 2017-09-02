@@ -7,16 +7,20 @@ import csv
 from selenium.common.exceptions import NoSuchElementException
 import time
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 
 
 #Declaration global data
 driver=None
-url="https://www.nike.com/launch/?s=upcoming"
-#url="https://www.nike.com/launch/"
-implicit_wait_time=30
-load_timeout=30
+url="https://www.nike.com/launch/"
+#url="https://www.facebook.com"
+
+
+
+implicit_wait_time=50
+load_timeout=50
 
 
 
@@ -32,9 +36,8 @@ load_timeout=30
 #
 headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
            'Accept-Language': 'zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
-           'User-Agent': 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0',
-           'Connection': 'keep-alive',
-
+           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246',
+           'Connection': 'keep-alive'
                      }
 
 
@@ -66,15 +69,21 @@ def getOrCreateDriver():
     global driver
     for key, value in headers.iteritems():
         webdriver.DesiredCapabilities.PHANTOMJS['phantomjs.page.customHeaders.{}'.format(key)] = value
-    # webdriver.DesiredCapabilities.PHANTOMJS[
-    #     'phantomjs.page.settings.userAgent'] = random.choice(uaList)
     webdriver.DesiredCapabilities.PHANTOMJS[
-        'phantomjs.page.settings.userAgent'] = 2
+        'phantomjs.page.settings.userAgent'] = random.choice(uaList)
+    # webdriver.DesiredCapabilities.PHANTOMJS[
+    #     'phantomjs.page.settings.userAgent'] = uaList[2]
     
     if driver is not None:
         return driver
     else:
-        driver = webdriver.PhantomJS("./phantomjs")
+        service_args = [
+            # '--proxy=107.174.48.114:8989',
+            # '--proxy-type=http',
+            # '--ignore-ssl-errors=true',
+            '--load-images=no'
+            ]
+        driver = webdriver.PhantomJS("./phantomjs",service_args=service_args)
         print(driver.capabilities)
         driver.set_window_size(1120, 550)
         driver.implicitly_wait(implicit_wait_time)
@@ -135,26 +144,19 @@ def writeToCSV():
 if __name__ == "__main__":
     driver  = getOrCreateDriver()
     try:
-
-        # service_args = [
-        #     '--proxy=127.0.0.1:9999',
-        #     '--proxy-type=http',
-        #     '--ignore-ssl-errors=true'
-        #     ]
-#      driver  = getOrCreateDriver(service_args=service_args)
+        driver.implicitly_wait(25)
         driver.get(url) 
-        time.sleep(2)
-        print('Phantomjs driver started')
-        driver.save_screenshot("home_page.png")
+        print('Phantomjs driver started & url fetched')
+        driver.save_screenshot("snapshots/home_page.png")
 
-        link = driver.find_element_by_partial_link_text("Log In")
+#        link = driver.find_element_by_xpath("//a[@class='js-log-in small text-color-grey u-sm-ib u-va-m mr4-sm']")
+        link = driver.find_element_by_link_text("Join / Log In")
         link.click();
-        time.sleep(2)
         print('sleep after login CLICK')
-        driver.save_screenshot("login-modal.png")
+        driver.save_screenshot("snapshots/login-modal.png")
 
-        email="asda@ascs.co"
-        password="sdcsdc"
+        email="Soletreason@gmail.com"
+        password="Test123!"
 
         print('login screenshot saved')
         emailInput = driver.find_element_by_name("emailAddress")
@@ -165,18 +167,125 @@ if __name__ == "__main__":
         passwordInput.clear()
         passwordInput.send_keys(password)
 
-        driver.save_screenshot("filled-modal.png")
+        driver.save_screenshot("snapshots/filled-modal.png")
         print('sleep after login')
 
         loginButton = driver.find_element_by_xpath("//input[@type='button']")
         loginButton.click()
+        time.sleep(20)        
 
-        time.sleep(5)
-        driver.save_screenshot("final_page.png")
+        driver.save_screenshot("snapshots/post_logged_in_page.png")
+        
 
-        print("Closing Phantomjs Driver")
+        menu=driver.find_element_by_xpath("//figcaption[@class='test-name small text-color-grey u-capitalize u-sm-ib u-va-m']")
+        menu.click()
+        driver.save_screenshot("snapshots/logged_in_menu.png")
+
+
+        settings = driver.find_element_by_link_text("Settings")
+        settings.click()
+        time.sleep(8)
+        driver.save_screenshot("snapshots/settings_page.png")
+
+
+        element = driver.find_element_by_link_text("New Card")
+        # element = driver.find_element_by_xpath("js-creditcard ncss-btn border-medium-grey ncss-brand pr5-sm pl5-sm pt3-sm pb3-sm pt2-md pb2-md u-uppercase mb2-sm mb0-md u-sm-b u-md-ib")
+        hov = ActionChains(driver).move_to_element(element)
+        hov.perform()
+        time.sleep(2)        
+        driver.save_screenshot("snapshots/mouse_over.png");
+        new_card.click()
+
+
+
+        driver.save_screenshot("snapshots/cc_form.png");
+
+
+        # Input ID
+
+        ccnumber="123"
+        expiration="12/12"
+        fname="lol"
+        lname="poll"
+        add1="ascbaskcns"
+        add2="23/ad"
+        city=""
+        state=""
+        zipcode=""
+        no="123456"
+
+        ccInput = driver.find_element_by_id("creditCardNumber")
+        ccInput.clear()
+        ccInput.send_keys(ccnumber)
+
+        expirationInput = driver.find_element_by_id("expirationDate")
+        expirationInput.clear()
+        expirationInput.send_keys(expiration)
+
+
+        fnameInput = driver.find_element_by_id("first-name-shipping")
+        fnameInput.clear()
+        fnameInput.send_keys(ccnumber)
+
+
+        lnameInput = driver.find_element_by_id("last-name-shipping")
+        lnameInput.clear()
+        lnameInput.send_keys(ccnumber)
+
+        add1Input = driver.find_element_by_id("shipping-address-1")
+        add1Input.clear()
+        add1Input.send_keys(expiration)
+
+
+        add2Input = driver.find_element_by_id("shipping-address-2")
+        add2Input.clear()
+        add2Input.send_keys(ccnumber)
+
+        cityInput = driver.find_element_by_id("city")
+        cityInput.clear()
+        cityInput.send_keys(expiration)
+
+
+        stateInput = driver.find_element_by_id("state")
+        stateInput.clear()
+        stateInput.send_keys(expiration)
+
+
+        zipcodeInput = driver.find_element_by_id("zipcode")
+        zipcodeInput.clear()
+        zipcodeInput.send_keys(ccnumber)
+
+        mobInput = driver.find_element_by_id("phone-number")
+        mobInput.clear()
+        mobInput.send_keys(no)
+
+
+
+
+
+        driver.save_screenshot("snapshots/filled-credit-form.png")
+        print('sleep after login')
+
+        saveButton = driver.find_element_by_link_text("Save")
+        saveButton.click()
+        time.sleep(20)     
+
+
+        driver.save_screenshot("snapshots/almost-done.png")
+
+        menu=driver.find_element_by_xpath("//figcaption[@class='test-name small text-color-grey u-capitalize u-sm-ib u-va-m']")
+        menu.click()
+        logout = driver.find_element_by_link_text("Logout")
+        logout.click()
+        driver.save_screenshot("snapshots/slogged_out_page.png")
+                
+        print("Logged out user now closing Phantomjs Driver")
     except TimeoutException as e:
-        print("printing exception below     :")
+        print("Got Exception | Logging out     :")
         print(e)
+
+        # driver.find_element_by_link_text("Logout").click()
+        # driver.save_screenshot("snapshots/logout.png")
+
     finally:
         driver.quit()
