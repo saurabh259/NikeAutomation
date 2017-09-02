@@ -18,9 +18,8 @@ url="https://www.nike.com/launch/"
 #url="https://www.facebook.com"
 
 
-
-implicit_wait_time=50
-load_timeout=50
+implicit_wait_time=100
+load_timeout=100
 
 
 
@@ -71,16 +70,13 @@ def getOrCreateDriver():
         webdriver.DesiredCapabilities.PHANTOMJS['phantomjs.page.customHeaders.{}'.format(key)] = value
     webdriver.DesiredCapabilities.PHANTOMJS[
         'phantomjs.page.settings.userAgent'] = random.choice(uaList)
-    # webdriver.DesiredCapabilities.PHANTOMJS[
-    #     'phantomjs.page.settings.userAgent'] = uaList[2]
-    
     if driver is not None:
         return driver
     else:
         service_args = [
-            # '--proxy=107.174.48.114:8989',
-            # '--proxy-type=http',
-            # '--ignore-ssl-errors=true',
+            '--proxy=107.174.48.114:8989',
+            '--proxy-type=http',
+            '--ignore-ssl-errors=true',
             '--load-images=no'
             ]
         driver = webdriver.PhantomJS("./phantomjs",service_args=service_args)
@@ -144,7 +140,7 @@ def writeToCSV():
 if __name__ == "__main__":
     driver  = getOrCreateDriver()
     try:
-        driver.implicitly_wait(25)
+        driver.implicitly_wait(100)
         driver.get(url) 
         print('Phantomjs driver started & url fetched')
         driver.save_screenshot("snapshots/home_page.png")
@@ -152,7 +148,7 @@ if __name__ == "__main__":
 #        link = driver.find_element_by_xpath("//a[@class='js-log-in small text-color-grey u-sm-ib u-va-m mr4-sm']")
         link = driver.find_element_by_link_text("Join / Log In")
         link.click();
-        print('sleep after login CLICK')
+        print('sleep after button CLICK')
         driver.save_screenshot("snapshots/login-modal.png")
 
         email="Soletreason@gmail.com"
@@ -168,7 +164,7 @@ if __name__ == "__main__":
         passwordInput.send_keys(password)
 
         driver.save_screenshot("snapshots/filled-modal.png")
-        print('sleep after login')
+        print('sleep after login click')
 
         loginButton = driver.find_element_by_xpath("//input[@type='button']")
         loginButton.click()
@@ -188,7 +184,6 @@ if __name__ == "__main__":
         driver.save_screenshot("snapshots/settings_page.png")
 
 
-#        driver.execute_script("")
 
 
         element = driver.find_element_by_partial_link_text("NEW CARD")
@@ -213,59 +208,79 @@ if __name__ == "__main__":
         zipcode=""
         no="123456"
 
-        
+        # driver.get("file:///Users/freesoul/Downloads/a.html")
+        # time.sleep(10)
+        iframe = driver.find_element_by_xpath('//iframe[1]')
+        driver.execute_script("arguments[0].removeAttribute('sandbox','sandbox')",iframe);
+        print('Script executed')
+        print(iframe.get_attribute('innerHTML'))
 
-        iframe = driver.find_elements_by_tag_name('iframe')[0]
-#        driver.switch_to_default_content()
-        print(iframe)
-        driver.switch_to_frame(iframe)
+        print(iframe.get_attribute("src"))
+        print(iframe.get_attribute("class"))
+
+        print(iframe.get_attribute("sandbox"))
+
+        # iframe.execute_script()
+
+        driver.switch_to_default_content();
+        driver.switch_to_frame(0)
+        print('sleep after switch')
+        time.sleep(10)
         driver.save_screenshot("snapshots/iframe.png");
+        print('switched frame to ---- ')
 
-        ccInput = driver.find_element_by_xpath("//input[@id='creditCardNumber']")
+        print(driver.page_source)
+
+       
+
+
+        ccInput = driver.find_element_by_id("creditCardNumber")
         ccInput.clear()
         ccInput.send_keys(ccnumber)
 
 
-        expirationInput = driver.find_element_by_id("expirationDate")
+        expirationInput = driver.find_element_by_xpath("//input[@id='expirationDate']")
         expirationInput.clear()
         expirationInput.send_keys(expiration)
 
 
-        driver.switchTo().defaultContent();
+        driver.switch_to.default_content();
         driver.save_screenshot("snapshots/back-from-iframe.png");
+        print('switched frames again :|')
+
 
 
         fnameInput = driver.find_element_by_id("first-name-shipping")
         fnameInput.clear()
-        fnameInput.send_keys(ccnumber)
+        fnameInput.send_keys(fname)
 
 
         lnameInput = driver.find_element_by_id("last-name-shipping")
         lnameInput.clear()
-        lnameInput.send_keys(ccnumber)
+        lnameInput.send_keys(lname)
 
         add1Input = driver.find_element_by_id("shipping-address-1")
         add1Input.clear()
-        add1Input.send_keys(expiration)
+        add1Input.send_keys(add1)
 
 
         add2Input = driver.find_element_by_id("shipping-address-2")
         add2Input.clear()
-        add2Input.send_keys(ccnumber)
+        add2Input.send_keys(add2)
 
         cityInput = driver.find_element_by_id("city")
         cityInput.clear()
-        cityInput.send_keys(expiration)
+        cityInput.send_keys(city)
 
 
         stateInput = driver.find_element_by_id("state")
         stateInput.clear()
-        stateInput.send_keys(expiration)
+        stateInput.send_keys(state)
 
 
         zipcodeInput = driver.find_element_by_id("zipcode")
         zipcodeInput.clear()
-        zipcodeInput.send_keys(ccnumber)
+        zipcodeInput.send_keys(zipcode)
 
         mobInput = driver.find_element_by_id("phone-number")
         mobInput.clear()
@@ -276,9 +291,12 @@ if __name__ == "__main__":
         saveButton = driver.find_element_by_link_text("Save")
         saveButton.click()
         time.sleep(20)     
+        
         driver.save_screenshot("snapshots/almost-done.png")
         menu=driver.find_element_by_xpath("//figcaption[@class='test-name small text-color-grey u-capitalize u-sm-ib u-va-m']")
         menu.click()
+
+
         logout = driver.find_element_by_link_text("Logout")
         logout.click()
         driver.save_screenshot("snapshots/slogged_out_page.png")                
