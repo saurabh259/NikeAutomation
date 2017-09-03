@@ -8,21 +8,18 @@ from selenium.common.exceptions import NoSuchElementException
 import time
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.proxy import *
-
+import sys
 
 #Declaration global data
 driver=None
 url="https://www.nike.com/launch/"
 implicit_wait_time=60
-load_timeout=60
-
+load_timeout=120
 
 
 #Saving all error/warning logs to given file
 #Change here for change in log filename or Log LEVEL
 logging.basicConfig(filename='logs/nikeScript.log',level=logging.ERROR)
-
-
 
 
 #
@@ -34,7 +31,6 @@ headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;
            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246',
            'Connection': 'keep-alive'
                      }
-
 
 
 #
@@ -55,6 +51,35 @@ uaList=[
 
 
 
+#
+#Fetch proxy ip which is not used recently in last 5 minutes
+#
+def getAvailableProxyIP():
+    ip=""
+    now = time.time()
+    print ("time-stamp now - "+str(now))
+    reader = csv.reader(open("proxyList.csv", "rb"))
+    writer = csv.writer(open("proxyList.csv", "wb"))
+    for rows in reader:
+      ip = rows[0]
+      timestamp = rows[1]
+      print('parsing proxy ')
+      print(ip)
+      print(timestamp)
+      difference=(int(now) - int(timestamp))
+      print("Difference in  seconds "+str(difference))
+      if(difference>300):
+        rows[0]=ip
+        rows[1]=now
+        writer.writerow(rows)
+        print("sending proxy IP - "+str(ip))
+        writer.close()
+        return ip
+    return ""
+
+
+
+
 
 
 #
@@ -64,37 +89,40 @@ uaList=[
 def getOrCreateDriver():
     global driver
 
+    ip=getAvailableProxyIP()
+
+#testing with and without proxy 
+#    ip="127.0.0.1:9999"
+    ip=""
+    
+
     for key, value in headers.iteritems():
         webdriver.DesiredCapabilities.PHANTOMJS['phantomjs.page.customHeaders.{}'.format(key)] = value
     webdriver.DesiredCapabilities.PHANTOMJS[
         'phantomjs.page.settings.userAgent'] = random.choice(uaList)
+    
 
-#
-#Use this section to set/unset proxy 
-#
 
-#    PROXY = "54.157.185.100:10000"    
-#     webdriver.DesiredCapabilities.PHANTOMJS['proxy'] = {
-#     "httpProxy":PROXY,
-#     "ftpProxy":PROXY,
-#     "sslProxy":PROXY,
-#     "noProxy":None,
-#     "proxyType":"MANUAL",
-#     "class":"org.openqa.selenium.Proxy",
-#     "autodetect":False
-# }
-
-    if driver is not None:
-        return driver
-    else:
+    if len(ip)<1:
+        print('No proxy available ')
         service_args = [
-            '--load-images=no'
+            '--load-images=no',
             ]
-        driver = webdriver.PhantomJS("./phantomjs",service_args=service_args)
-        driver.set_window_size(1120, 550)
-        driver.implicitly_wait(implicit_wait_time)
-        driver.set_page_load_timeout(load_timeout)
-        return driver
+        driver = webdriver.PhantomJS("./phantomjs",service_args=service_args)    
+    else:
+        print('using proxy ip = '+ip)
+        service_args = [
+            '--proxy='+ip,
+            '--proxy-type=socks5',
+                ]
+
+        driver = webdriver.PhantomJS('./phantomjs',service_args=service_args)
+
+    driver.set_window_size(1120, 550)
+    driver.implicitly_wait(implicit_wait_time)
+    driver.set_page_load_timeout(load_timeout)
+    
+    return driver
 
 
      
@@ -123,12 +151,20 @@ def csvReader():
 
 
 
+
+
+
 #
 # Main function
 #
 if __name__ == "__main__":
 
-    driver  = getOrCreateDriver()
+    try:
+
+        driver  = getOrCreateDriver()
+    except:
+        print('Exception fetching driver')
+        print(sys.exc_info()[0])
     try:
         driver.implicitly_wait(100)
         driver.get(url) 
@@ -195,14 +231,8 @@ if __name__ == "__main__":
             time.sleep(5)
             driver.save_screenshot("snapshots/new_card.png");
 
-         
-
-
             iframe = driver.find_element_by_xpath('//iframe[1]')
-            # print(iframe.get_attribute("src"))
-            # print(iframe.get_attribute("class"))
-            # print(iframe.get_attribute("sandbox"))
-
+         
             driver.switch_to_default_content();
             driver.switch_to_frame(1)
             print('switched to credit card frame')
