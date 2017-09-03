@@ -23,5 +23,5 @@ Download BeautifulSoup3 using pip - pip install bs3
 ##How to run - 
 Go to script folder and type -> python nike.py
 
-Sample Output 
-
+Sample Output  - Go to snapshots folder in project directory.
+Logs - Go to logs folder in project directory.
