@@ -11,12 +11,15 @@ from selenium.webdriver.common.proxy import *
 import sys
 import webbrowser
 import os
+import time
+import thread
+
 
 
 #Declaration global data
 driver=None
 url="https://www.nike.com/launch/"
-implicit_wait_time=60
+implicit_wait_time=40
 load_timeout=120
 
 
@@ -34,7 +37,6 @@ headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;
            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246',
            'Connection': 'keep-alive'
                      }
-
 
 #
 # List of User Agent's, each time driver is being instantiated
@@ -83,12 +85,6 @@ def getAvailableProxyIP():
 
 
 
-
-#def fetchuserDetails():
-
-
-
-
 #
 #Function creates a new driver or return an existing driver if any.
 #uses custom header and random User Agent
@@ -96,51 +92,57 @@ def getAvailableProxyIP():
 def getOrCreateDriver():
     global driver
 
+
 #    ip=getAvailableProxyIP()
 
+
 #testing with and without proxy 
-#    ip="127.0.0.1:9999"
+    # ip="127.0.0.1:9999"
     ip=""
+
+    for key, value in headers.iteritems():
+        webdriver.DesiredCapabilities.PHANTOMJS['phantomjs.page.customHeaders.{}'.format(key)] = value
+    webdriver.DesiredCapabilities.PHANTOMJS[
+        'phantomjs.page.settings.userAgent'] = random.choice(uaList)
     
 
-    # for key, value in headers.iteritems():
-    #     webdriver.DesiredCapabilities.PHANTOMJS['phantomjs.page.customHeaders.{}'.format(key)] = value
-    # webdriver.DesiredCapabilities.PHANTOMJS[
-    #     'phantomjs.page.settings.userAgent'] = random.choice(uaList)
+
+
+    if len(ip)<1:
+        service_args = [
+            '--load-images=no',
+            ]
+        driver = webdriver.PhantomJS("./phantomjs",service_args=service_args)    
+    else:
+        print('using proxy ip = '+ip)
+        service_args = [
+            '--proxy='+ip,
+            '--proxy-type=http',
+            '--ignore-ssl-errors=true',
+            '--load-images=no'
+                ]
+        driver = webdriver.PhantomJS('./phantomjs',service_args=service_args)
+
+
+## -----    Using chrome for UI testing --------------
+    # chromedriver = "/usr/local/bin/chromedriver"
+    # chromeOptions = webdriver.ChromeOptions()
+    # prefs = {"profile.managed_default_content_settings.images":2}
+    # chromeOptions.add_experimental_option("prefs",prefs)
+    # driver = webdriver.Chrome(chromedriver,chrome_options=chromeOptions)
+
     
 
-
-    # if len(ip)<1:
-    #     service_args = [
-    #         '--load-images=no',
-    #         ]
-    #     driver = webdriver.PhantomJS("./phantomjs",service_args=service_args)    
-    # else:
-    #     print('using proxy ip = '+ip)
-    #     service_args = [
-    #         '--proxy='+ip,
-    #         '--proxy-type=socks5',
-    #             ]
-
-    #     driver = webdriver.PhantomJS('./phantomjs',service_args=service_args)
-
-    chromedriver = "/usr/local/bin/chromedriver"
-    
-    chromeOptions = webdriver.ChromeOptions()
-    prefs = {"profile.managed_default_content_settings.images":2}
-    chromeOptions.add_experimental_option("prefs",prefs)
-    driver = webdriver.Chrome(chromedriver,chrome_options=chromeOptions)
-
-
+    #driver configurations
+#    driver.setLogLevel(Level.OFF)
     driver.set_window_size(1120, 550)
-    driver.implicitly_wait(implicit_wait_time)
+    # driver.implicitly_wait(implicit_wait_time)
     driver.set_page_load_timeout(load_timeout)
     
     return driver
 
 
-     
-
+    
 
 
 ##Check given element exists using Xpath        
@@ -154,15 +156,208 @@ def check_exists_by_xpath(xpath):
 
 
 
-
-
-
 #Read CSV file and return reader to calling function
 def csvReader(filename):
     inputReader = csv.reader(open(filename), delimiter=',')
     return inputReader
 
 
+
+
+#
+#    SEARCH  for credit card from given ID  
+#
+def creditCardFetcher(rowId):
+    row=[]
+    with open("inputs/creditCards.csv", 'rb') as f:
+        for row in f:
+            if row[0]==rowId:
+                rowL = row.split(",")
+                return rowL
+
+
+#
+# fetch and fill all data
+#
+def fetchAndFill():
+    start_time = time.time()
+    try:
+        driver  = getOrCreateDriver()
+    except Exception as e:
+        print('Exception fetching driver')
+        print(e)
+    
+    retry=0
+    while True:
+        try:
+            retry+=1
+            driver.implicitly_wait(30)
+            driver.get(url) 
+            print('Phantomjs driver started & fetched url -'+str(url))
+            driver.save_screenshot("snapshots/home_page.png")        
+            print("reading CSV for user credentials - ")
+
+            #Read all input data
+            inputReader=csvReader('inputs/userCredentials.csv');
+            for row in inputReader:
+                print(" Processing - "+str(row))
+                
+                username=row[0]
+                password=row[1]
+                ccid=row[2]
+                row2= creditCardFetcher(ccid)
+                ccnumber=row2[1]
+                expiration=row2[2]
+                fname=row2[3]
+                lname=row2[4]
+                add1=row2[5]
+                add2=row2[6]
+                city=row2[7]
+                state=row2[8]
+                zipcode=row2[9]
+                mobNo=row2[10]
+
+
+
+                link = driver.find_element_by_link_text("Join / Log In")
+                link.click()
+                time.sleep(3)
+
+                emailInput = driver.find_element_by_name("emailAddress")
+                emailInput.clear()
+                emailInput.send_keys(username)
+
+                passwordInput = driver.find_element_by_name("password")
+                passwordInput.clear()
+                passwordInput.send_keys(password)
+                print(username)
+
+
+               
+                loginButton = driver.find_element_by_xpath("//input[@type='button']")
+                driver.save_screenshot("snapshots/filled-modal.png")
+                print('Login clicked |  sleep for 4 sec. ')
+
+                loginButton.click()
+                time.sleep(4)
+            
+
+                menu=driver.find_element_by_xpath("//figcaption[@class='test-name small text-color-grey u-capitalize u-sm-ib u-va-m']")
+                menu.click()
+                driver.save_screenshot("snapshots/logged_in_menu.png")
+
+
+                settings = driver.find_element_by_link_text("Settings")
+                settings.click()
+                time.sleep(4)
+                driver.save_screenshot("snapshots/settings_page.png")
+            
+                print('Logged in adding new card')
+                element = driver.find_element_by_partial_link_text("NEW CARD")
+                element.click()
+                time.sleep(5)
+                driver.save_screenshot("snapshots/new_card.png");
+
+
+                iframe = driver.find_element_by_xpath('//iframe[1]')
+             
+                driver.switch_to_default_content();
+                driver.switch_to_frame(1)
+                print('switched to credit card frame')
+
+                ccInput = driver.find_element_by_id("creditCardNumber")
+                ccInput.clear()
+                ccInput.send_keys(ccnumber)
+
+
+                expirationInput = driver.find_element_by_xpath("//input[@id='expirationDate']")
+                expirationInput.clear()
+                expirationInput.send_keys(expiration)
+
+
+                driver.switch_to.default_content();
+
+
+                fnameInput = driver.find_element_by_id("first-name-shipping")
+                fnameInput.clear()
+                fnameInput.send_keys(fname)
+
+
+                lnameInput = driver.find_element_by_id("last-name-shipping")
+                lnameInput.clear()
+                lnameInput.send_keys(lname)
+
+                add1Input = driver.find_element_by_id("shipping-address-1")
+                add1Input.clear()
+                add1Input.send_keys(add1)
+
+
+                add2Input = driver.find_element_by_id("shipping-address-2")
+                add2Input.clear()
+                add2Input.send_keys(add2)
+
+                cityInput = driver.find_element_by_id("city")
+                cityInput.clear()
+                cityInput.send_keys(city)
+
+
+                stateInput = driver.find_element_by_id("state")
+                stateInput.clear()
+                stateInput.send_keys(state)
+
+
+                zipcodeInput = driver.find_element_by_id("zipcode")
+                zipcodeInput.clear()
+                zipcodeInput.send_keys(zipcode)
+
+                mobInput = driver.find_element_by_id("phone-number")
+                mobInput.clear()
+                mobInput.send_keys(mobNo)
+
+                driver.save_screenshot("snapshots/filled-credit-info.png")
+                print('sleep after hitting save details!!')
+                saveButton = driver.find_element_by_link_text("Save")
+                saveButton.click()
+                time.sleep(2)     
+                print("ADDED card detals for user "+username)
+
+                driver.save_screenshot("snapshots/card-info-saved.png")
+ 
+                # logoutUser()               
+                # print("Logged out user!!")
+            break
+        except Exception as e:
+            print("Got Exception | Logging out - ")
+            print(e)
+            if(retry>4):
+                break
+        finally:
+            logoutUser()
+            print("closing phantom-js driver")
+            if driver != None:
+                driver.quit()
+            
+            print(" %s  seconds consumed by script ." % (time.time() - start_time))
+
+
+def logoutUser():
+    menu=driver.find_element_by_xpath("//figcaption[@class='test-name small text-color-grey u-capitalize u-sm-ib u-va-m']")
+    menu.click()            
+    logout = driver.find_element_by_link_text("Logout")
+    logout.click()
+    time.sleep(1)
+    print("Logged out user!!")
+
+
+#
+# Main function
+#
+if __name__ == "__main__":
+    try:
+      fetchAndFill()
+    except Exception as e:
+       print "Error: unable to start thread"
+       print e
 
 
 # #
@@ -238,204 +433,3 @@ def csvReader(filename):
 #         time.sleep(4)
 
 
-
-
-
-def creditCardFetcher(rowId):
-    row=[]
-    with open("inputs/creditCards.csv", 'rb') as f:
-        for row in f:
-            if row[0]==rowId:
-                print("got row ID - ")
-                print(row)
-                return row
-
-        # reader = csv.DictReader(f)
-        # print("processing this data - ")
-        # print(list(reader))
-
-
-
-        # for row in reader:
-        #     print("complete row below ------ ")
-        #     print(row)
-
-        # rows = [row for row in reader if row['id'] == rowId]
-        # print(rows)
-
-
-
-#
-# Main function
-#
-if __name__ == "__main__":
-    username  =password = ccid=""
-
-    try:
-
-        driver  = getOrCreateDriver()
-    except Exception as e:
-        print('Exception fetching driver')
-        print(e)
-    try:
-        driver.implicitly_wait(40)
-        driver.get(url) 
-        print('Phantomjs driver started & fetched url -'+str(url))
-        driver.save_screenshot("snapshots/home_page.png")
-
-        try:
-            print("reading CSV for user credentials - ")
-            #read all input data
-            inputReader=csvReader('inputs/userCredentials.csv');
-            for row in inputReader:
-                print("processing - "+str(row))
-                username=row[0]
-                password=row[1]
-                ccid=row[2]
-
-                row2= creditCardFetcher("1")
-
-                ccnumber=row2[1]
-                expiration=row2[2]
-                fname=row2[3]
-                lname=row2[4]
-                add1=row2[5]
-                add2=row2[6]
-                city=row2[7]
-                state=row2[8]
-                zipcode=row2[9]
-                mobNo=row2[10]
-
-                print("credit card details -    ")
-                print(row2)
-
-                link = driver.find_element_by_link_text("Join / Log In")
-                link.click()
-                time.sleep(2)
-
-                emailInput = driver.find_element_by_name("emailAddress")
-                emailInput.clear()
-                emailInput.send_keys(username)
-
-                passwordInput = driver.find_element_by_name("password")
-                passwordInput.clear()
-                passwordInput.send_keys(password)
-                print(username)
-
-
-               
-                loginButton = driver.find_element_by_xpath("//input[@type='button']")
-                driver.save_screenshot("snapshots/filled-modal.png")
-                print('Login clicked |  sleep')
-
-                loginButton.click()
-                time.sleep(4)
-            
-                menu=driver.find_element_by_xpath("//figcaption[@class='test-name small text-color-grey u-capitalize u-sm-ib u-va-m']")
-                menu.click()
-                driver.save_screenshot("snapshots/logged_in_menu.png")
-
-
-                settings = driver.find_element_by_link_text("Settings")
-                settings.click()
-                time.sleep(1)
-                driver.save_screenshot("snapshots/settings_page.png")
-            
-                print('Logged in adding new card')
-                element = driver.find_element_by_partial_link_text("NEW CARD")
-                element.click()
-                time.sleep(5)
-                driver.save_screenshot("snapshots/new_card.png");
-
-                iframe = driver.find_element_by_xpath('//iframe[1]')
-             
-                driver.switch_to_default_content();
-                driver.switch_to_frame(1)
-                print('switched to credit card frame')
-
-                ccInput = driver.find_element_by_id("creditCardNumber")
-                ccInput.clear()
-                ccInput.send_keys(ccnumber)
-
-
-                expirationInput = driver.find_element_by_xpath("//input[@id='expirationDate']")
-                expirationInput.clear()
-                expirationInput.send_keys(expiration)
-
-
-                driver.switch_to.default_content();
-
-
-                fnameInput = driver.find_element_by_id("first-name-shipping")
-                fnameInput.clear()
-                fnameInput.send_keys(fname)
-
-
-                lnameInput = driver.find_element_by_id("last-name-shipping")
-                lnameInput.clear()
-                lnameInput.send_keys(lname)
-
-                add1Input = driver.find_element_by_id("shipping-address-1")
-                add1Input.clear()
-                add1Input.send_keys(add1)
-
-
-                add2Input = driver.find_element_by_id("shipping-address-2")
-                add2Input.clear()
-                add2Input.send_keys(add2)
-
-                cityInput = driver.find_element_by_id("city")
-                cityInput.clear()
-                cityInput.send_keys(city)
-
-
-                stateInput = driver.find_element_by_id("state")
-                stateInput.clear()
-                stateInput.send_keys(state)
-
-
-                zipcodeInput = driver.find_element_by_id("zipcode")
-                zipcodeInput.clear()
-                zipcodeInput.send_keys(zipcode)
-
-                mobInput = driver.find_element_by_id("phone-number")
-                mobInput.clear()
-                mobInput.send_keys(mobNo)
-
-                driver.save_screenshot("snapshots/filled-credit-info.png")
-                print('sleep after hitting save details!!')
-                saveButton = driver.find_element_by_link_text("Save")
-                saveButton.click()
-                time.sleep(5)     
-        except Exception as e:
-            print('Exception saving card details ')
-            print(e)
-            
-
-        try:
-            driver.save_screenshot("snapshots/card-info-saved.png")
-            menu=driver.find_element_by_xpath("//figcaption[@class='test-name small text-color-grey u-capitalize u-sm-ib u-va-m']")
-            menu.click()
-
-            print("ADDED card detals for user "+username)
-
-
-            logout = driver.find_element_by_link_text("Logout")
-            logout.click()
-            driver.save_screenshot("snapshots/logging_out_page.png")                
-            print("Logged out user!!")
-        except Exception as e:
-            print('Exception try block 2nd | loggin out  ')
-            print(e)
-
-
-    except TimeoutException as e:
-        print("Got Exception | Logging out     :")
-        print(e)
-
-        driver.find_element_by_link_text("Logout").click()
-        driver.save_screenshot("snapshots/logout.png")
-
-    finally:
-        print("closing phantom-js driver")
-        driver.quit()
