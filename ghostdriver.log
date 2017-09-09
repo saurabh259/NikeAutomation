@@ -1,15 +1,15 @@
-[INFO  - 2017-09-03T15:02:06.749Z] GhostDriver - Main - running on port 54979
-[INFO  - 2017-09-03T15:02:07.730Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":false,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/34.0.1847.116 Chrome/34.0.1847.116 Safari/537.36","webSecurityEnabled":true}
-[INFO  - 2017-09-03T15:02:07.730Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.customHeaders:  - {"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8","Accept-Language":"zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3","Connection":"keep-alive","User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246"}
-[INFO  - 2017-09-03T15:02:07.730Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"mac-unknown-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"},"phantomjs.page.customHeaders.Connection":"keep-alive","phantomjs.page.customHeaders.User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246","phantomjs.page.customHeaders.Accept-Language":"zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3","phantomjs.page.customHeaders.Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8","phantomjs.page.settings.userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/34.0.1847.116 Chrome/34.0.1847.116 Safari/537.36"}
-[INFO  - 2017-09-03T15:02:07.730Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: dacba1d0-90b8-11e7-b490-c59a7ee7b6ff
-[ERROR - 2017-09-03T15:02:07.742Z] RouterReqHand - _handle.error - {"name":"Missing Command Parameter","message":"{\"headers\":{\"Accept\":\"application/json\",\"Accept-Encoding\":\"identity\",\"Connection\":\"close\",\"Content-Length\":\"73\",\"Content-Type\":\"application/json;charset=UTF-8\",\"Host\":\"127.0.0.1:54979\",\"User-Agent\":\"Python http auth\"},\"httpVersion\":\"1.1\",\"method\":\"POST\",\"post\":\"{\\\"pageLoad\\\": 120000, \\\"sessionId\\\": \\\"dacba1d0-90b8-11e7-b490-c59a7ee7b6ff\\\"}\",\"url\":\"/timeouts\",\"urlParsed\":{\"anchor\":\"\",\"query\":\"\",\"file\":\"timeouts\",\"directory\":\"/\",\"path\":\"/timeouts\",\"relative\":\"/timeouts\",\"port\":\"\",\"host\":\"\",\"password\":\"\",\"user\":\"\",\"userInfo\":\"\",\"authority\":\"\",\"protocol\":\"\",\"source\":\"/timeouts\",\"queryKey\":{},\"chunks\":[\"timeouts\"]},\"urlOriginal\":\"/session/dacba1d0-90b8-11e7-b490-c59a7ee7b6ff/timeouts\"}","line":546,"sourceURL":"phantomjs://code/session_request_handler.js","stack":"_postTimeout@phantomjs://code/session_request_handler.js:546:73\n_handle@phantomjs://code/session_request_handler.js:148:25\n_reroute@phantomjs://code/request_handler.js:61:20\n_handle@phantomjs://code/router_request_handler.js:78:46"}
+[INFO  - 2017-09-03T18:40:31.649Z] GhostDriver - Main - running on port 51511
+[INFO  - 2017-09-03T18:40:32.317Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":false,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/34.0.1847.116 Chrome/34.0.1847.116 Safari/537.36","webSecurityEnabled":true}
+[INFO  - 2017-09-03T18:40:32.317Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.customHeaders:  - {"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8","Accept-Language":"zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3","Connection":"keep-alive","User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246"}
+[INFO  - 2017-09-03T18:40:32.317Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"mac-unknown-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"},"phantomjs.page.customHeaders.Connection":"keep-alive","phantomjs.page.customHeaders.User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246","phantomjs.page.customHeaders.Accept-Language":"zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3","phantomjs.page.customHeaders.Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8","phantomjs.page.settings.userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/34.0.1847.116 Chrome/34.0.1847.116 Safari/537.36"}
+[INFO  - 2017-09-03T18:40:32.317Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f
+[ERROR - 2017-09-03T18:40:32.336Z] RouterReqHand - _handle.error - {"name":"Missing Command Parameter","message":"{\"headers\":{\"Accept\":\"application/json\",\"Accept-Encoding\":\"identity\",\"Connection\":\"close\",\"Content-Length\":\"73\",\"Content-Type\":\"application/json;charset=UTF-8\",\"Host\":\"127.0.0.1:51511\",\"User-Agent\":\"Python http auth\"},\"httpVersion\":\"1.1\",\"method\":\"POST\",\"post\":\"{\\\"pageLoad\\\": 120000, \\\"sessionId\\\": \\\"5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f\\\"}\",\"url\":\"/timeouts\",\"urlParsed\":{\"anchor\":\"\",\"query\":\"\",\"file\":\"timeouts\",\"directory\":\"/\",\"path\":\"/timeouts\",\"relative\":\"/timeouts\",\"port\":\"\",\"host\":\"\",\"password\":\"\",\"user\":\"\",\"userInfo\":\"\",\"authority\":\"\",\"protocol\":\"\",\"source\":\"/timeouts\",\"queryKey\":{},\"chunks\":[\"timeouts\"]},\"urlOriginal\":\"/session/5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f/timeouts\"}","line":546,"sourceURL":"phantomjs://code/session_request_handler.js","stack":"_postTimeout@phantomjs://code/session_request_handler.js:546:73\n_handle@phantomjs://code/session_request_handler.js:148:25\n_reroute@phantomjs://code/request_handler.js:61:20\n_handle@phantomjs://code/router_request_handler.js:78:46"}
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:24.483Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - msg: RangeError: Maximum call stack size exceeded.
+[ERROR - 2017-09-03T18:41:01.354Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - msg: RangeError: Maximum call stack size exceeded.
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:24.483Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - stack:
+[ERROR - 2017-09-03T18:41:01.355Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - stack:
   anonymous (undefined:1)
   anonymous (:1)
   anonymous (:1)
@@ -212,10 +212,10 @@
   anonymous (:1)
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:24.503Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - msg: RangeError: Maximum call stack size exceeded.
+[ERROR - 2017-09-03T18:41:01.376Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - msg: RangeError: Maximum call stack size exceeded.
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:24.503Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - stack:
+[ERROR - 2017-09-03T18:41:01.376Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - stack:
   anonymous (undefined:1)
   anonymous (:1)
   anonymous (:1)
@@ -418,10 +418,10 @@
   anonymous (:1)
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:24.521Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - msg: RangeError: Maximum call stack size exceeded.
+[ERROR - 2017-09-03T18:41:01.399Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - msg: RangeError: Maximum call stack size exceeded.
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:24.521Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - stack:
+[ERROR - 2017-09-03T18:41:01.399Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - stack:
   anonymous (undefined:1)
   anonymous (:1)
   anonymous (:1)
@@ -624,10 +624,10 @@
   anonymous (:1)
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:24.534Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - msg: RangeError: Maximum call stack size exceeded.
+[ERROR - 2017-09-03T18:41:01.429Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - msg: RangeError: Maximum call stack size exceeded.
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:24.534Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - stack:
+[ERROR - 2017-09-03T18:41:01.429Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - stack:
   anonymous (undefined:1)
   anonymous (:1)
   anonymous (:1)
@@ -830,14 +830,14 @@
   anonymous (:1)
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:33.856Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - msg: TypeError: null is not an object (evaluating 'document.getElementById("logo-preview").className="preview-icn z2"')
+[ERROR - 2017-09-03T18:41:07.832Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - msg: TypeError: null is not an object (evaluating 'document.getElementById("logo-preview").className="preview-icn z2"')
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:33.856Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - stack:
-  g (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:15)
-  r (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:15)
-  f (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:10)
-  v (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:9)
+[ERROR - 2017-09-03T18:41:07.833Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - stack:
+  g (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:15)
+  r (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:15)
+  f (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:10)
+  v (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:9)
   sendEvent (:0)
   _keyEvent (phantomjs://code/inputs.js:325)
   _pressKey (phantomjs://code/inputs.js:280)
@@ -850,14 +850,14 @@
   _handle (phantomjs://code/router_request_handler.js:78)
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:33.860Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - msg: TypeError: null is not an object (evaluating 'document.getElementById("logo-preview").className="preview-icn z2"')
+[ERROR - 2017-09-03T18:41:07.842Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - msg: TypeError: null is not an object (evaluating 'document.getElementById("logo-preview").className="preview-icn z2"')
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:33.860Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - stack:
-  g (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:15)
-  r (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:15)
-  f (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:10)
-  v (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:9)
+[ERROR - 2017-09-03T18:41:07.842Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - stack:
+  g (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:15)
+  r (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:15)
+  f (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:10)
+  v (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:9)
   sendEvent (:0)
   _keyEvent (phantomjs://code/inputs.js:325)
   _pressKey (phantomjs://code/inputs.js:280)
@@ -870,14 +870,14 @@
   _handle (phantomjs://code/router_request_handler.js:78)
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:33.864Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - msg: TypeError: null is not an object (evaluating 'document.getElementById("logo-preview").className="preview-icn z2"')
+[ERROR - 2017-09-03T18:41:07.845Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - msg: TypeError: null is not an object (evaluating 'document.getElementById("logo-preview").className="preview-icn z2"')
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:33.864Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - stack:
-  g (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:15)
-  r (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:15)
-  f (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:10)
-  v (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:9)
+[ERROR - 2017-09-03T18:41:07.845Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - stack:
+  g (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:15)
+  r (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:15)
+  f (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:10)
+  v (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:9)
   sendEvent (:0)
   _keyEvent (phantomjs://code/inputs.js:325)
   _pressKey (phantomjs://code/inputs.js:280)
@@ -890,16 +890,16 @@
   _handle (phantomjs://code/router_request_handler.js:78)
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:33.865Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - msg: TypeError: null is not an object (evaluating 'document.getElementById("logo-preview").className="preview-icn z2 "+previewClassName+"-icn"')
+[ERROR - 2017-09-03T18:41:07.848Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - msg: TypeError: null is not an object (evaluating 'document.getElementById("logo-preview").className="preview-icn z2 "+previewClassName+"-icn"')
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-03T15:02:33.865Z] Session [dacba1d0-90b8-11e7-b490-c59a7ee7b6ff] - page.onError - stack:
-  (anonymous function) (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:15)
+[ERROR - 2017-09-03T18:41:07.848Z] Session [5dbcc470-90d7-11e7-b03f-39cb0dd9bd9f] - page.onError - stack:
+  (anonymous function) (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:15)
   forEach (:0)
-  g (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:14)
-  r (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:15)
-  f (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:10)
-  v (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=10g1wojuklupm15fsvi84rkv1z?v=1504450950626:9)
+  g (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:14)
+  r (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:15)
+  f (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:10)
+  v (https://paymentcc.nike.com/resources/js/all.min.js;jsessionid=19lrzd4cqmw3up4hd933ta4b8?v=1504464065351:9)
   sendEvent (:0)
   _keyEvent (phantomjs://code/inputs.js:325)
   _pressKey (phantomjs://code/inputs.js:280)
