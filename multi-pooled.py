@@ -1,6 +1,7 @@
-##Python library imports
-
 from multiprocessing.dummy import Pool as ThreadPool
+
+
+    ##Python library imports
 import BeautifulSoup
 from selenium import webdriver
 import random 
@@ -21,12 +22,14 @@ import threading
 
 
 #Declaration global data
-thread_count=4
+thread_count=1
 lock = threading.Lock()
 driver=None
 url="https://www.nike.com/launch/"
-implicit_wait_time=25
-load_timeout=40
+implicit_wait_time=30
+load_timeout=60
+allUserDetails={}
+userCredentialsList=None
 
 
 
@@ -81,6 +84,7 @@ def getAvailableProxyIP():
     try:    
         ip=""
         now = int(time.time())
+        print ("time-stamp now - "+str(now))
         file1 = open("inputs/proxyList.csv", 'rb')
         file2 = open("inputs/proxyListTemp.csv","wb")
 
@@ -89,13 +93,15 @@ def getAvailableProxyIP():
         check=False
         for rows in reader:
             if(check==False):
+                print("parsing row number "+str(rows))
                 timestamp = int(rows[1])
+                print('parsing proxy ')
                 difference=(int(now)-timestamp)
                 print("Difference in  seconds "+str(difference))
                 if(abs(difference)>60):
                     ip=rows[0]
                     rows[1]=now
-                    
+                    print("sending proxy IP - "+str(ip))
                     check=True
                 else:
                     print("failed proxy IP "+str(ip)+"as time stamp was "+str(timestamp))
@@ -223,6 +229,10 @@ def creditCardFetcher(rowId):
 #
 def loginAndSave(row):
 
+
+
+    start_time = time.time()
+
 #Fetch available proxy IP in locked condition
     with lock:
         retry=0
@@ -270,12 +280,13 @@ def loginAndSave(row):
             print(username)
 
 
+            print(userCredentialsList)
             loginButton = driver.find_element_by_xpath("//input[@type='button']")
             driver.save_screenshot("snapshots/filled-modal.png")
             print('Login clicked |  sleep for 4 sec. ')
 
             loginButton.click()
-            time.sleep(3)
+            time.sleep(4)
 
             break
         except Exception as e:
@@ -304,7 +315,7 @@ def loginAndSave(row):
 
             settings = driver.find_element_by_link_text("Settings")
             settings.click()
-            time.sleep(3)
+            time.sleep(4)
             driver.save_screenshot("snapshots/settings_page.png")
         
         
@@ -341,6 +352,8 @@ def loginAndSave(row):
         try:
             retry+=1
 
+
+            print('Clicking add new card')
             element = driver.find_element_by_partial_link_text("NEW CARD")
             element.click()
             time.sleep(4)
@@ -352,6 +365,7 @@ def loginAndSave(row):
 #Change wen switching b/w phantom and chrome
 #            driver.switch_to_frame(0)
             driver.switch_to_frame(1)
+            print('switched to credit card i-frame')
 
 
             ccInput = driver.find_element_by_id("creditCardNumber")
@@ -404,12 +418,15 @@ def loginAndSave(row):
             mobInput.send_keys(mobNo)
 
             driver.save_screenshot("snapshots/filled-credit-info.png")
+            print('sleep after hitting save details!!')
             saveButton = driver.find_element_by_link_text("Save")
             saveButton.click()
             time.sleep(2)     
+            print("Added card details!!")
 
             driver.save_screenshot("snapshots/card-info-saved.png")
 
+            print("ADDED card detals for user "+username+" & Logged him out!!")
             break
         except Exception as e:
             print("Got Exception Retrying count - "+str(retry))
@@ -421,6 +438,7 @@ def loginAndSave(row):
                 logger.error('Error saving card details in user settings   - '+str(username))
                 if driver != None:
                     driver.quit()
+                print(" %s  seconds consumed by thread ." % (time.time() - start_time))
                 return
 
 
@@ -458,6 +476,7 @@ def logoutUser():
         logout = driver.find_element_by_link_text("Logout")
         logout.click()
         time.sleep(1)
+        print("Logged out user!!")
     except Exception as e:
         print("exception logging out - ")
         print(e)
@@ -478,9 +497,9 @@ if __name__ == "__main__":
     userCredentialsList = list(userCredentials)
 
     try:
-
 # Create pool with max_thread_count and 
 # pass all user credentials list
+
         pool = ThreadPool(thread_count)
         results = pool.map(loginAndSave, userCredentialsList)
         pool.close()
