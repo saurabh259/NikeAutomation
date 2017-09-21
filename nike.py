@@ -95,7 +95,6 @@ def getAvailableProxyIP():
                 if(abs(difference)>60):
                     ip=rows[0]
                     rows[1]=now
-                    
                     check=True
                 else:
                     print("failed proxy IP "+str(ip)+"as time stamp was "+str(timestamp))
@@ -196,11 +195,10 @@ def check_exists_by_xpath(xpath):
 
 
 
-
 #Read CSV file and return reader to calling function
 def csvReader(filename):
     with lock:
-        inputReader = csv.reader(open(filename), delimiter=',')
+        inputReader = csv.reader(open(filename,'rU'), delimiter=',',dialect=csv.excel_tab)
         return inputReader
 
 
