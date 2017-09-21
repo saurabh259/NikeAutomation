@@ -30,7 +30,9 @@ driver=None
 url="https://www.nike.com/launch/"
 implicit_wait_time=25
 load_timeout=40
+max_retry=2
 
+# webdriver | phantomjs =  0 & chrome = 1
 
 
 
@@ -100,7 +102,7 @@ def getAvailableProxyIP():
                     rows[1]=now
                     check=True
                 else:
-                    print("failed proxy IP "+str(ip)+"as time stamp was "+str(timestamp))
+                    print("failed proxy IP "+str(ip)+" as time stamp was "+str(timestamp))
             writer.writerow(rows)
         
         file1.close()
@@ -122,7 +124,9 @@ def checkElementByName(text):
     return True
 
     
-    
+def cleanupOutput(fName):
+    with open(fName, "w"):
+        pass
 
 
 
@@ -143,12 +147,10 @@ def checkElementByName(text):
 def createDriverWithProxy():
     global driver
 
-
-
     ip=getAvailableProxyIP()
 
-#   testing with and without proxy 
-    #ip="13.56.91.112:443"
+  # testing with and without proxy 
+    # ip="13.56.91.112:443"
     # ip="40.71.33.56:3128"
     # ip="127.0.0.1:9999"
     
@@ -159,26 +161,45 @@ def createDriverWithProxy():
         webdriver.DesiredCapabilities.PHANTOMJS['phantomjs.page.customHeaders.{}'.format(key)] = value
     webdriver.DesiredCapabilities.PHANTOMJS[
         'phantomjs.page.settings.userAgent'] = random.choice(uaList)
-    print('proxy ip fetched = '+ip)
        
     while True:
-        ip=""
         if len(ip)<1:
+            time.sleep(40)
+            ip=getAvailableProxyIP()
+  
+
+
+# Without proxy run phantomjs
             # service_arg = [
             #     '--load-images=no',
             #     ]
             # driver = webdriver.PhantomJS("./phantomjs",service_args=service_arg)    
             # break
-            time.sleep(40)
-            ip=getAvailableProxyIP()
         else:
             print('using proxy ip = '+ip)
-            service_arg = [
-                '--proxy='+ip,
-                '--proxy-type=http',
-                '--web-security=no',
-                '--ignore-ssl-errors=yes',
-                    ]
+            all_data_list=ip.split(":")
+
+            
+            if(len(all_data_list)>2):
+                user=all_data_list[2]
+                passwd=all_data_list[3]
+                ip=all_data_list[0]+":"+all_data_list[1]
+                service_arg = [
+                    '--proxy='+ip,
+                    '--proxy-auth='+user+':'+passwd,
+                    '--proxy-type=http',
+                    '--web-security=no',
+                    '--ignore-ssl-errors=yes',
+                        ]
+            else:
+                service_arg = [
+                    '--proxy='+ip,
+                    '--proxy-type=http',
+                    '--web-security=no',
+                    '--ignore-ssl-errors=yes',
+                        ]
+
+
             driver = webdriver.PhantomJS('./phantomjs',service_args=service_arg)
             print(driver.capabilities)
             break    
@@ -218,7 +239,7 @@ def check_exists_by_xpath(xpath):
 
 # Each thread saves its status inside
 # output_status file
-def saveThreadOutput(email,mobile_verifiaction,status):
+def saveThreadOutput(email,mobile_verifiaction,status,filename):
     with lock:
         file2 = open("outputs/output_status.csv","a")
         writer = csv.writer(file2)
@@ -226,6 +247,7 @@ def saveThreadOutput(email,mobile_verifiaction,status):
         row.append(email)
         row.append(mobile_verifiaction)
         row.append(status)
+        row.append(filename)
         writer.writerow(row)
         file2.close()
 
@@ -246,7 +268,7 @@ def csvReader(filename):
 #
 def creditCardFetcher(rowId):
     row=[]
-    with open("inputs/creditCards.csv", 'rb') as f:
+    with open("inputs/creditCards.csv", 'rU') as f:
         for row in f:
             if row[0]==rowId:
                 rowL = row.split(",")
@@ -281,7 +303,7 @@ def loginAndSave(row):
                 print(e)
                 if(retry>3):
                     return
-                    break
+                    
 
     
 
@@ -329,13 +351,13 @@ def loginAndSave(row):
             print(e)
             driver.save_screenshot("snapshots/login-error.png")
             
-            if(retry>2):
+            if(retry>max_retry):
                 logger.error('Error in user login page  - '+str(username))
                 logger.error(e)
-                name+="snapshots/"+randomword(6)+".png"
+                name="snapshots/"+randomword(6)+".png"
                 driver.save_screenshot(name)
-                logger.error("------------------- snapshot saved as  - "+name)
-                saveThreadOutput(username,"Not sure","Fail")
+                logger.error("Snapshot saved as  - "+name)
+                saveThreadOutput(username,"Unknown","Error",name)
                 return
  
 
@@ -348,13 +370,11 @@ def loginAndSave(row):
 
             menu=driver.find_element_by_xpath("//figcaption[@class='test-name small text-color-grey u-capitalize u-sm-ib u-va-m']")
             menu.click()
-            driver.save_screenshot("snapshots/logged_in_menu.png")
-
+        
 
             settings = driver.find_element_by_link_text("Settings")
             settings.click()
             time.sleep(3)
-            driver.save_screenshot("snapshots/settings_page.png")
         
         
 
@@ -365,18 +385,23 @@ def loginAndSave(row):
 
             if(retry==1):
                 check = checkElementByName("SEND CODE")
-                saveThreadOutput(username,"Not verified","Fail")
-                if driver != None:
-                    driver.quit()
-                return
-
-            if(retry>2):
-                logger.error('Error in user homepage, cannot move to settings(Mobile verification?)   - '+str(username))
-                logger.error(e)
-                name+="snapshots/"+randomword(6)+".png"
+                name="snapshots/"+randomword(6)+".png"
                 driver.save_screenshot(name)
                 logger.error("Exception moving to settings..  snapshot saved as  - "+name)
-                saveThreadOutput(username,"Not Sure","Fail")
+                logger.error(e)
+                saveThreadOutput(username,"Unverified","Error",name)
+                
+                if driver != None:
+                    driver.quit()
+           
+                return
+
+            if(retry>max_retry):
+                name="snapshots/"+randomword(6)+".png"
+                driver.save_screenshot(name)
+                logger.error("Exception moving to settings..  snapshot saved as  - "+name)
+                logger.error(e)
+                saveThreadOutput(username,"unknown","Error",name)
                 if driver != None:
                     driver.quit()
                 return
@@ -406,11 +431,9 @@ def loginAndSave(row):
             element.click()
             time.sleep(4)
             driver.save_screenshot("snapshots/new_card.png");
-
-            # iframe = driver.find_element_by_xpath('//iframe[1]')
-
             driver.switch_to_default_content();
-#Change wen switching b/w phantom and chrome
+            
+            #Change when switching b/w phantom-1 and chrome-0
             # driver.switch_to_frame(0)
             driver.switch_to_frame(1)
 
@@ -464,29 +487,25 @@ def loginAndSave(row):
             mobInput.clear()
             mobInput.send_keys(mobNo)
 
-            driver.save_screenshot("snapshots/filled-credit-info.png")
             saveButton = driver.find_element_by_link_text("Save")
             saveButton.click()
             time.sleep(2)     
-
-            driver.save_screenshot("snapshots/card-info-saved.png")
 
             break
         except Exception as e:
             print("Got Exception Retrying count - "+str(retry))
             print(e)
-            driver.save_screenshot("snapshots/card-save-error.png")
 
-            if(retry>2):
+            if(retry>max_retry):
                 logoutUser()
                 logger.error('Error saving card details in user settings   - '+str(username))
                 logger.error(e)
-                name+="snapshots/"+randomword(6)+".png"
+                name="snapshots/"+randomword(6)+".png"
                 driver.save_screenshot(name)
-                logger.error("------------------- snapshot saved as  - "+name)
+                logger.error("Snapshot saved as  - "+name)
+                saveThreadOutput(username,"Verified","Error",name)
                 if driver != None:
                     driver.quit()
-                saveThreadOutput(username,"Verified","Fail")
                 return
                 
 
@@ -494,17 +513,16 @@ def loginAndSave(row):
     while True:
         try:
             retry+=1
+            saveThreadOutput(username,"Verified","Success","-")
             logoutUser()
-            saveThreadOutput(username,"Verified","Pass")
-
+            
             if driver != None:
                 driver.quit()
             break               
         except Exception as e:
-            print("exception logging out retrying - "+str(retry))
+            print("Exception logging out retrying - "+str(retry))
             print(e)
-            if(retry>2):
-
+            if(retry>max_retry):
                 break
 
 
@@ -521,7 +539,7 @@ def logoutUser():
         logout.click()
         time.sleep(1)
     except Exception as e:
-        print("exception logging out - ")
+        print("Exception logging out - ")
         print(e)
 
 
@@ -536,11 +554,11 @@ def logoutUser():
 if __name__ == "__main__":
     try:
 
-
 # fetch all user credentials and
         userCredentials=csvReader('inputs/userCredentials.csv');
         userCredentialsList = list(userCredentials)
-
+        cleanupOutput("outputs/output_status.csv")
+        saveThreadOutput("Username","Mobile verification status","Job status","Error snapshot")
 
 # Create pool with max_thread_count and 
 # pass all user credentials list
@@ -549,13 +567,15 @@ if __name__ == "__main__":
         pool.close()
         pool.join()
         
-        print("Program finished for all users | Check output file for individual report..") 
+        print("Program finished for all users | Check outputs/output_status.csv for individual report..") 
     except Exception as e:
-        print "Error: Exception in main thread :"
+        print "Error: Exception in main thread | Check module logs for more details  | Check outputs/output_status.csv for proccessed reports id's :"
         print e
-        exc_type, exc_obj, exc_tb = sys.exc_info()
-        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-        print(exc_type, fname, exc_tb.tb_lineno)
+        logger.error(exc_type+" - "+fname+"-"+exc_tb.tb_lineno)
+
+        # exc_type, exc_obj, exc_tb = sys.exc_info()
+        # fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        # print(exc_type, fname, exc_tb.tb_lineno)
 
 
 
