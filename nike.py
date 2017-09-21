@@ -302,7 +302,8 @@ def loginAndSave(row):
                 print('Exception fetching driver!!')
                 print(e)
                 if(retry>3):
-                    return
+                   saveThreadOutput(username,"Driver error | check proxy","Error","-")
+                   return
                     
 
     
@@ -318,7 +319,6 @@ def loginAndSave(row):
             driver.get(url) 
             print('Phantomjs driver started &  url fetched - '+str(url))
             driver.save_screenshot("snapshots/home_page.png")        
-                
             username=row[0]
             password=row[1]
             ccid=row[2]
