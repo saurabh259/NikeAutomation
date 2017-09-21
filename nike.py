@@ -486,7 +486,7 @@ if __name__ == "__main__":
         pool.close()
         pool.join()
         
-        print("Saved card details for all users :)") 
+        # print("Saved card details for all users :)") 
     except Exception as e:
        print "Error: Exception in main thread :"
        print e

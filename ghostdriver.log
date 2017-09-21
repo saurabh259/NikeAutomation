@@ -1,32 +1,266 @@
-[INFO  - 2017-09-13T13:51:44.945Z] GhostDriver - Main - running on port 57762
-[INFO  - 2017-09-13T13:51:45.019Z] Session [adfe4340-988a-11e7-b841-6df21528191a] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":false,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (compatible; Origyn Web Browser; AmigaOS 4.0; U; en) AppleWebKit/531.0+ (KHTML, like Gecko, Safari/531.0+)","webSecurityEnabled":true}
-[INFO  - 2017-09-13T13:51:45.019Z] Session [adfe4340-988a-11e7-b841-6df21528191a] - page.customHeaders:  - {"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8","Accept-Language":"zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3","Connection":"keep-alive","User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246"}
-[INFO  - 2017-09-13T13:51:45.019Z] Session [adfe4340-988a-11e7-b841-6df21528191a] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"mac-unknown-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"},"phantomjs.page.customHeaders.Connection":"keep-alive","phantomjs.page.customHeaders.User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246","phantomjs.page.customHeaders.Accept-Language":"zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3","phantomjs.page.customHeaders.Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8","phantomjs.page.settings.userAgent":"Mozilla/5.0 (compatible; Origyn Web Browser; AmigaOS 4.0; U; en) AppleWebKit/531.0+ (KHTML, like Gecko, Safari/531.0+)"}
-[INFO  - 2017-09-13T13:51:45.019Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: adfe4340-988a-11e7-b841-6df21528191a
-[ERROR - 2017-09-13T13:51:45.044Z] RouterReqHand - _handle.error - {"name":"Missing Command Parameter","message":"{\"headers\":{\"Accept\":\"application/json\",\"Accept-Encoding\":\"identity\",\"Connection\":\"close\",\"Content-Length\":\"73\",\"Content-Type\":\"application/json;charset=UTF-8\",\"Host\":\"127.0.0.1:57762\",\"User-Agent\":\"Python http auth\"},\"httpVersion\":\"1.1\",\"method\":\"POST\",\"post\":\"{\\\"pageLoad\\\": 120000, \\\"sessionId\\\": \\\"adfda700-988a-11e7-aa6c-7b2e72f53a1e\\\"}\",\"url\":\"/timeouts\",\"urlParsed\":{\"anchor\":\"\",\"query\":\"\",\"file\":\"timeouts\",\"directory\":\"/\",\"path\":\"/timeouts\",\"relative\":\"/timeouts\",\"port\":\"\",\"host\":\"\",\"password\":\"\",\"user\":\"\",\"userInfo\":\"\",\"authority\":\"\",\"protocol\":\"\",\"source\":\"/timeouts\",\"queryKey\":{},\"chunks\":[\"timeouts\"]},\"urlOriginal\":\"/session/adfda700-988a-11e7-aa6c-7b2e72f53a1e/timeouts\"}","line":546,"sourceURL":"phantomjs://code/session_request_handler.js","stack":"_postTimeout@phantomjs://code/session_request_handler.js:546:73\n_handle@phantomjs://code/session_request_handler.js:148:25\n_reroute@phantomjs://code/request_handler.js:61:20\n_handle@phantomjs://code/router_request_handler.js:78:46"}
+[INFO  - 2017-09-21T01:22:45.279Z] GhostDriver - Main - running on port 51313
+[INFO  - 2017-09-21T01:22:45.306Z] Session [5f24b560-9e6b-11e7-86ff-4ff2cd1ef9c8] - page.settings - {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":false,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (compatible; Origyn Web Browser; AmigaOS 4.1; ppc; U; en) AppleWebKit/530.0+ (KHTML, like Gecko, Safari/530.0+)","webSecurityEnabled":true}
+[INFO  - 2017-09-21T01:22:45.306Z] Session [5f24b560-9e6b-11e7-86ff-4ff2cd1ef9c8] - page.customHeaders:  - {"Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8","Accept-Language":"zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3","Connection":"keep-alive","User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246"}
+[INFO  - 2017-09-21T01:22:45.306Z] Session [5f24b560-9e6b-11e7-86ff-4ff2cd1ef9c8] - Session.negotiatedCapabilities - {"browserName":"phantomjs","version":"2.1.1","driverName":"ghostdriver","driverVersion":"1.2.0","platform":"mac-unknown-64bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"},"phantomjs.page.customHeaders.Connection":"keep-alive","phantomjs.page.customHeaders.User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246","phantomjs.page.customHeaders.Accept-Language":"zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3","phantomjs.page.customHeaders.Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8","phantomjs.page.settings.userAgent":"Mozilla/5.0 (compatible; Origyn Web Browser; AmigaOS 4.1; ppc; U; en) AppleWebKit/530.0+ (KHTML, like Gecko, Safari/530.0+)"}
+[INFO  - 2017-09-21T01:22:45.306Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 5f24b560-9e6b-11e7-86ff-4ff2cd1ef9c8
+[ERROR - 2017-09-21T01:22:45.314Z] RouterReqHand - _handle.error - {"name":"Missing Command Parameter","message":"{\"headers\":{\"Accept\":\"application/json\",\"Accept-Encoding\":\"identity\",\"Connection\":\"close\",\"Content-Length\":\"72\",\"Content-Type\":\"application/json;charset=UTF-8\",\"Host\":\"127.0.0.1:51313\",\"User-Agent\":\"Python http auth\"},\"httpVersion\":\"1.1\",\"method\":\"POST\",\"post\":\"{\\\"pageLoad\\\": 40000, \\\"sessionId\\\": \\\"5f24b560-9e6b-11e7-86ff-4ff2cd1ef9c8\\\"}\",\"url\":\"/timeouts\",\"urlParsed\":{\"anchor\":\"\",\"query\":\"\",\"file\":\"timeouts\",\"directory\":\"/\",\"path\":\"/timeouts\",\"relative\":\"/timeouts\",\"port\":\"\",\"host\":\"\",\"password\":\"\",\"user\":\"\",\"userInfo\":\"\",\"authority\":\"\",\"protocol\":\"\",\"source\":\"/timeouts\",\"queryKey\":{},\"chunks\":[\"timeouts\"]},\"urlOriginal\":\"/session/5f24b560-9e6b-11e7-86ff-4ff2cd1ef9c8/timeouts\"}","line":546,"sourceURL":"phantomjs://code/session_request_handler.js","stack":"_postTimeout@phantomjs://code/session_request_handler.js:546:73\n_handle@phantomjs://code/session_request_handler.js:148:25\n_reroute@phantomjs://code/request_handler.js:61:20\n_handle@phantomjs:/[ERROR - 2017-09-21T01:23:39.071Z] WebElementLocator - _handleLocateCommand [ERROR - 2017-09-21T01:23:41.751Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search[ERROR - 2017-09-21T01:24:19.572Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1505957059540
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-13T13:51:45.046Z] RouterReqHand - _handle.error - {"name":"Missing Command Parameter","message":"{\"headers\":{\"Accept\":\"application/json\",\"Accept-Encoding\":\"identity\",\"Connection\":\"close\",\"Content-Length\":\"73\",\"Content-Type\":\"application/json;charset=UTF-8\",\"Host\":\"127.0.0.1:57762\",\"User-Agent\":\"Python http auth\"},\"httpVersion\":\"1.1\",\"method\":\"POST\",\"post\":\"{\\\"pageLoad\\\": 120000, \\\"sessionId\\\": \\\"adfda700-988a-11e7-aa6c-7b2e72f53a1e\\\"}\",\"url\":\"/timeouts\",\"urlParsed\":{\"anchor\":\"\",\"query\":\"\",\"file\":\"timeouts\",\"directory\":\"/\",\"path\":\"/timeouts\",\"relative\":\"/timeouts\",\"port\":\"\",\"host\":\"\",\"password\":\"\",\"user\":\"\",\"userInfo\":\"\",\"authority\":\"\",\"protocol\":\"\",\"source\":\"/timeouts\",\"queryKey\":{},\"chunks\":[\"timeouts\"]},\"urlOriginal\":\"/session/adfda700-988a-11e7-aa6c-7b2e72f53a1e/timeouts\"}","line":546,"sourceURL":"phantomjs://code/session_request_handler.js","stack":"_postTimeout@phantomjs://code/session_request_handler.js:546:73\n_handle@phantomjs://code/session_request_handler.js:148:25\n_reroute@phantomjs://code/request_handler.js:61:20\n_handle@phantomjs://code/router_request_handler.js:78:46"}
+[ERROR - 2017-09-21T01:24:50.538Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1505957090534
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-13T13:51:45.047Z] RouterReqHand - _handle.error - {"name":"Missing Command Parameter","message":"{\"headers\":{\"Accept\":\"application/json\",\"Accept-Encoding\":\"identity\",\"Connection\":\"close\",\"Content-Length\":\"73\",\"Content-Type\":\"application/json;charset=UTF-8\",\"Host\":\"127.0.0.1:57762\",\"User-Agent\":\"Python http auth\"},\"httpVersion\":\"1.1\",\"method\":\"POST\",\"po[INFO  - 2017-09-13T13:53:33.123Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase[INFO  - 2017-09-13T13:53:48.236Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-"port\":\"\",\"host\":\"\",\"password\":\"\",\"user\":\"\",\"userInfo\":\"\",\"authority\":\"\",\"protocol\":\"\",\"source\":\"/timeouts\",\"queryKey\":{},\"chunks\":[\"timeouts\"]},\"urlOriginal\":\"/session/adfda700-988a-11e7-aa6c-7b2e72f53a1e/timeouts\"}","line":546,"sourceURL":"phantomjs://code/session_request_handler.js","stack":"_postTimeout@phantomjs://code/session_request_handler.js:546:73\n_handle@phantomjs://code/session_request_handler.js:148:25\n_reroute@phantomjs://code/request_handler.js:61:20\n_handle@phantomjs://code/router_request_handler.js:78:46"}
+[ERROR - 2017-09-21T01:25:21.523Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1505957121472
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-13T13:51:45.049Z] RouterReqHand - _handle.error - {"name":"Missing [INFO  - 2017-09-13T13:54:49.725Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-ntent-Length\":\"73\",\"Content-Type\":\"application/json;charset=UTF-8\",\"Host\":\"127.0.0.1:57762\",\"User-Agent\":\"Python http auth\"},\"httpVersion\":\"1.1\",\"method\":\"POST\",\"post\":\"{\\\"pageLoad\\\": 120000, \\\"sessionId\\\": \\\"adfda700-988a-11e7-aa6c-7b2e72f53a1e\\\"}\",\"url\":\"/timeouts\",\"urlParsed\":{\"anchor\":\"\",\"query\":\"\",\"file\":\"timeouts\",\"directory\":\"/\",\"path\":\"/timeouts\",\"relative\":\"/timeouts\",\"port\":\"\",\"host\":\"\",\"password\":\"\",\"user\":\"\",\"userInfo\":\"\",\"authority\":\"\",\"protocol\":\"\",\"source\":\"/timeouts\",\"queryKey\":{},\"chunks\":[\"timeouts\"]},\"urlOriginal\":\"/session/adfda700-988a-11e7-aa6c-7b2e72f53a1e/timeouts\"}","line":546,"sourceURL":"phantomjs://code/session_request_handler.js","stack":"_postTimeout@phantomjs://code/session_request_handler.js:546:73\n_handle@phantomjs://code/session_request_handler.js:148:25\n_reroute@phantomjs://code/request_handler.js:61:20\n_handle@phantomjs://code/router_request_handler.js:78:46"}
+e.com/launch/:4)
+  r (https://www.nike.com/launch/:4)
+  o (https://www.nike.com/launch/:4)
+  (anonymous function) (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  u (https://www.nike.com/launch/:4)
+  nrWrapper (https://www.nike.com/launch/:4)
+  dispatchEvent (:0)
+  domThrow (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1455)
+  (anonymous function) (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1459)
+  nrWrapper (https://www.nike.com/launch/:4)
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-13T13:52:39.428Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1505310759361
+[ERROR - 2017-09-21T01:23:53.148Z] Session [5de7c890-9e6b-11e7-899e-8ddcf165c6d7] - page.onError - msg: RangeError: Maximum call stack size exceeded.
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-13T13:52:40.439Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1505310760404
+[ERROR - 2017-09-21T01:23:53.148Z] Session [5de7c890-9e6b-11e7-899e-8ddcf165c6d7] - page.onError - stack:
+  l (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  r (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  s (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  n (https://www.nike.com/launch/:4)
+  r (https://www.nike.com/launch/:4)
+  o (https://www.nike.com/launch/:4)
+  (anonymous function) (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  u (https://www.nike.com/launch/:4)
+  nrWrapper (https://www.nike.com/launch/:4)
+  dispatchEvent (:0)
+  domThrow (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1455)
+  (anonymous function) (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1459)
+  nrWrapper (https://www.nike.com/launch/:4)
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-13T13:52:41.632Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1505310761612
+[ERROR - 2017-09-21T01:23:53.257Z] Session [5de7c890-9e6b-11e7-899e-8ddcf165c6d7] - page.onError - msg: RangeError: Maximum call stack size exceeded.
 
   phantomjs://platform/console++.js:263 in error
-[ERROR - 2017-09-13T13:52:43.334Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1505310763253
+[ERROR - 2017-09-21T01:23:53.257Z] Session [5de7c890-9e6b-11e7-899e-8ddcf165c6d7] - page.onError - stack:
+  l (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  r (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  s (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  n (https://www.nike.com/launch/:4)
+  r (https://www.nike.com/launch/:4)
+  o (https://www.nike.com/launch/:4)
+  (anonymous function) (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  u (https://www.nike.com/launch/:4)
+  nrWrapper (https://www.nike.com/launch/:4)
+  dispatchEvent (:0)
+  domThrow (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1455)
+  (anonymous function) (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1459)
+  nrWrapper (https://www.nike.com/launch/:4)
 
   phantomjs://platform/console++.js:263 in error
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              [INFO  - 2017-09-13T13:53:05.595Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[ERROR - 2017-09-21T01:23:53.308Z] Session [5de7c890-9e6b-11e7-899e-8ddcf165c6d7] - page.onError - msg: RangeError: Maximum call stack size exceeded.
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:23:53.308Z] Session [5de7c890-9e6b-11e7-899e-8ddcf165c6d7] - page.onError - stack:
+  l (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  r (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  s (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  n (https://www.nike.com/launch/:4)
+  r (https://www.nike.com/launch/:4)
+  o (https://www.nike.com/launch/:4)
+  (anonymous function) (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  u (https://www.nike.com/launch/:4)
+  nrWrapper (https://www.nike.com/launch/:4)
+  dispatchEvent (:0)
+  domThrow (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1455)
+  (anonymous function) (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1459)
+  nrWrapper (https://www.nike.com/launch/:4)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:23:53.359Z] Session [5de7c890-9e6b-11e7-899e-8ddcf165c6d7] - page.onError - msg: RangeError: Maximum call stack size exceeded.
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:23:53.359Z] Session [5de7c890-9e6b-11e7-899e-8ddcf165c6d7] - page.onError - stack:
+  l (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  r (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  s (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  n (https://www.nike.com/launch/:4)
+  r (https://www.nike.com/launch/:4)
+  o (https://www.nike.com/launch/:4)
+  (anonymous function) (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  u (https://www.nike.com/launch/:4)
+  nrWrapper (https://www.nike.com/launch/:4)
+  dispatchEvent (:0)
+  domThrow (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1455)
+  (anonymous function) (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1459)
+  nrWrapper (https://www.nike.com/launch/:4)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:23:53.407Z] Session [5de7c890-9e6b-11e7-899e-8ddcf165c6d7] - page.onError - msg: RangeError: Maximum call stack size exceeded.
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:23:53.408Z] Session [5de7c890-9e6b-11e7-899e-8ddcf165c6d7] - page.onError - stack:
+  l (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  r (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  s (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  n (https://www.nike.com/launch/:4)
+  r (https://www.nike.com/launch/:4)
+  o (https://www.nike.com/launch/:4)
+  (anonymous function) (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  u (https://www.nike.com/launch/:4)
+  nrWrapper (https://www.nike.com/launch/:4)
+  dispatchEvent (:0)
+  domThrow (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1455)
+  (anonymous function) (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1459)
+  nrWrapper (https://www.nike.com/launch/:4)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:23:53.468Z] Session [5de7c890-9e6b-11e7-899e-8ddcf165c6d7] - page.onError - msg: RangeError: Maximum call stack size exceeded.
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:23:53.468Z] Session [5de7c890-9e6b-11e7-899e-8ddcf165c6d7] - page.onError - stack:
+  l (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  r (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  s (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  n (https://www.nike.com/launch/:4)
+  r (https://www.nike.com/launch/:4)
+  o (https://www.nike.com/launch/:4)
+  (anonymous function) (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  u (https://www.nike.com/launch/:4)
+  nrWrapper (https://www.nike.com/launch/:4)
+  dispatchEvent (:0)
+  domThrow (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1455)
+  (anonymous function) (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1459)
+  nrWrapper (https://www.nike.com/launch/:4)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:23:53.518Z] Session [5de7c890-9e6b-11e7-899e-8ddcf165c6d7] - page.onError - msg: RangeError: Maximum call stack size exceeded.
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:23:53.518Z] Session [5de7c890-9e6b-11e7-899e-8ddcf165c6d7] - page.onError - stack:
+  l (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  r (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  s (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  n (https://www.nike.com/launch/:4)
+  r (https://www.nike.com/launch/:4)
+  o (https://www.nike.com/launch/:4)
+  (anonymous function) (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  u (https://www.nike.com/launch/:4)
+  nrWrapper (https://www.nike.com/launch/:4)
+  dispatchEvent (:0)
+  domThrow (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1455)
+  (anonymous function) (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1459)
+  nrWrapper (https://www.nike.com/launch/:4)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:24:33.029Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1505957073012
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:25:03.367Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1505957103310
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:25:33.649Z] WebElementLocator - _handleLocateCommand - Element(s) NOT Found: GAVE UP. Search Stop Time: 1505957133612
+
+  phantomjs://platform/console++.js:263 in error
+sole++.js:263 in error
+[ERROR - 2017-09-21T01:24:50.303Z] Session [5f24b560-9e6b-11e7-86ff-4ff2cd1ef9c8] - page.onError - stack:
+  l (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  r (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  s (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  n (https://www.nike.com/launch/:4)
+  r (https://www.nike.com/launch/:4)
+  o (https://www.nike.com/launch/:4)
+  (anonymous function) (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  u (https://www.nike.com/launch/:4)
+  nrWrapper (https://www.nike.com/launch/:4)
+  dispatchEvent (:0)
+  domThrow (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1455)
+  (anonymous function) (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1459)
+  nrWrapper (https://www.nike.com/launch/:4)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:24:50.350Z] Session [5f24b560-9e6b-11e7-86ff-4ff2cd1ef9c8] - page.onError - msg: RangeError: Maximum call stack size exceeded.
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:24:50.350Z] Session [5f24b560-9e6b-11e7-86ff-4ff2cd1ef9c8] - page.onError - stack:
+  l (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  r (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  s (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  n (https://www.nike.com/launch/:4)
+  r (https://www.nike.com/launch/:4)
+  o (https://www.nike.com/launch/:4)
+  (anonymous function) (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  u (https://www.nike.com/launch/:4)
+  nrWrapper (https://www.nike.com/launch/:4)
+  dispatchEvent (:0)
+  domThrow (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1455)
+  (anonymous function) (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1459)
+  nrWrapper (https://www.nike.com/launch/:4)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:24:50.399Z] Session [5f24b560-9e6b-11e7-86ff-4ff2cd1ef9c8] - page.onError - msg: RangeError: Maximum call stack size exceeded.
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:24:50.399Z] Session [5f24b560-9e6b-11e7-86ff-4ff2cd1ef9c8] - page.onError - stack:
+  l (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  r (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  s (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  n (https://www.nike.com/launch/:4)
+  r (https://www.nike.com/launch/:4)
+  o (https://www.nike.com/launch/:4)
+  (anonymous function) (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  u (https://www.nike.com/launch/:4)
+  nrWrapper (https://www.nike.com/launch/:4)
+  dispatchEvent (:0)
+  domThrow (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1455)
+  (anonymous function) (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1459)
+  nrWrapper (https://www.nike.com/launch/:4)
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:24:50.473Z] Session [5f24b560-9e6b-11e7-86ff-4ff2cd1ef9c8] - page.onError - msg: RangeError: Maximum call stack size exceeded.
+
+  phantomjs://platform/console++.js:263 in error
+[ERROR - 2017-09-21T01:24:50.473Z] Session [5f24b560-9e6b-11e7-86ff-4ff2cd1ef9c8] - page.onError - stack:
+  l (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  r (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  s (https://js-agent.newrelic.com/nr-spa-1044.min.js:1)
+  n (https://www.nike.com/launch/:4)
+  r (https://www.nike.com/launch/:4)
+  o (https://www.nike.com/launch/:4)
+  (anonymous function) (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  n (https://www.nike.com/launch/:4)
+  u (https://www.nike.com/launch/:4)
+  nrWrapper (https://www.nike.com/launch/:4)
+  dispatchEvent (:0)
+  domThrow (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1455)
+  (anonymous function) (https://www.nike.com/launch/js/commons.16f50a171defc3273faf.js:1459)
+  nrWrapper (https://www.nike.com/launch/:4)
+
+  phantomjs://platform/console++.js:263 in error
