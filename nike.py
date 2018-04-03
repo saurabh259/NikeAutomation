@@ -147,70 +147,70 @@ def cleanupOutput(fName):
 def createDriverWithProxy():
     global driver
 
-    ip=getAvailableProxyIP()
+#     ip=getAvailableProxyIP()
 
-  # testing with and without proxy 
-    # ip="13.56.91.112:443"
-    # ip="40.71.33.56:3128"
-    # ip="127.0.0.1:9999"
+#   # testing with and without proxy 
+#     # ip="13.56.91.112:443"
+#     # ip="40.71.33.56:3128"
+#     # ip="127.0.0.1:9999"
     
-    # ip=""
+#     # ip=""
 
 
-    for key, value in headers.iteritems():
-        webdriver.DesiredCapabilities.PHANTOMJS['phantomjs.page.customHeaders.{}'.format(key)] = value
-    webdriver.DesiredCapabilities.PHANTOMJS[
-        'phantomjs.page.settings.userAgent'] = random.choice(uaList)
+#     for key, value in headers.iteritems():
+#         webdriver.DesiredCapabilities.PHANTOMJS['phantomjs.page.customHeaders.{}'.format(key)] = value
+#     webdriver.DesiredCapabilities.PHANTOMJS[
+#         'phantomjs.page.settings.userAgent'] = random.choice(uaList)
        
-    while True:
-        if len(ip)<1:
-            time.sleep(40)
-            ip=getAvailableProxyIP()
+#     while True:
+#         if len(ip)<1:
+#             time.sleep(40)
+#             ip=getAvailableProxyIP()
   
 
 
-# Without proxy run phantomjs
-            # service_arg = [
-            #     '--load-images=no',
-            #     ]
-            # driver = webdriver.PhantomJS("./phantomjs",service_args=service_arg)    
-            # break
-        else:
-            print('using proxy ip = '+ip)
-            all_data_list=ip.split(":")
+# # Without proxy run phantomjs
+#             # service_arg = [
+#             #     '--load-images=no',
+#             #     ]
+#             # driver = webdriver.PhantomJS("./phantomjs",service_args=service_arg)    
+#             # break
+#         else:
+#             print('using proxy ip = '+ip)
+#             all_data_list=ip.split(":")
 
             
-            if(len(all_data_list)>2):
-                user=all_data_list[2]
-                passwd=all_data_list[3]
-                ip=all_data_list[0]+":"+all_data_list[1]
-                service_arg = [
-                    '--proxy='+ip,
-                    '--proxy-auth='+user+':'+passwd,
-                    '--proxy-type=http',
-                    '--web-security=no',
-                    '--ignore-ssl-errors=yes',
-                        ]
-            else:
-                service_arg = [
-                    '--proxy='+ip,
-                    '--proxy-type=http',
-                    '--web-security=no',
-                    '--ignore-ssl-errors=yes',
-                        ]
+#             if(len(all_data_list)>2):
+#                 user=all_data_list[2]
+#                 passwd=all_data_list[3]
+#                 ip=all_data_list[0]+":"+all_data_list[1]
+#                 service_arg = [
+#                     '--proxy='+ip,
+#                     '--proxy-auth='+user+':'+passwd,
+#                     '--proxy-type=http',
+#                     '--web-security=no',
+#                     '--ignore-ssl-errors=yes',
+#                         ]
+#             else:
+#                 service_arg = [
+#                     '--proxy='+ip,
+#                     '--proxy-type=http',
+#                     '--web-security=no',
+#                     '--ignore-ssl-errors=yes',
+#                         ]
 
 
-            driver = webdriver.PhantomJS('./phantomjs',service_args=service_arg)
-            print(driver.capabilities)
-            break    
+#             driver = webdriver.PhantomJS('./phantomjs',service_args=service_arg)
+#             print(driver.capabilities)
+#             break    
 
 
-# # -----    Using chrome for UI testing --------------
-    # chromedriver = "/usr/local/bin/chromedriver"
-    # chromeOptions = webdriver.ChromeOptions()
-    # prefs = {"profile.managed_default_content_settings.images":2}
-    # chromeOptions.add_experimental_option("prefs",prefs)
-    # driver = webdriver.Chrome(chromedriver,chrome_options=chromeOptions)
+# -----    Using chrome for UI testing --------------
+    chromedriver = "/usr/local/bin/chromedriver"
+    chromeOptions = webdriver.ChromeOptions()
+    prefs = {"profile.managed_default_content_settings.images":1}
+    chromeOptions.add_experimental_option("prefs",prefs)
+    driver = webdriver.Chrome(chromedriver,chrome_options=chromeOptions)
 
 
 
@@ -434,8 +434,8 @@ def loginAndSave(row):
             driver.switch_to_default_content();
             
             #Change when switching b/w phantom-1 and chrome-0
-            # driver.switch_to_frame(0)
-            driver.switch_to_frame(1)
+            driver.switch_to_frame(0)
+            # driver.switch_to_frame(1)
 
 
             ccInput = driver.find_element_by_id("creditCardNumber")
